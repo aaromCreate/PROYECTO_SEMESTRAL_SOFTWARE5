@@ -130,6 +130,19 @@ body {
   font-size: .9rem;
 }
 
+.hospital-item {
+    cursor: pointer;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+    transition: all 0.2s;
+}
+.hospital-item:hover { background: #0b2d4b; }
+.hospital-item.active { 
+    background: #2b343b9f;
+    border-left: 4px solid #007bff;
+}
+
 /* Cards */
 .card {
   background: radial-gradient(800px 500px at 100% 0%, #0f1a35 0%, var(--surface) 60%);
@@ -200,6 +213,25 @@ body {
 }
 .table tbody tr:hover {
   background: rgba(255,255,255,0.04);
+}
+
+.acciones-col {
+    text-align: center;
+}
+
+.btn-completar {
+    background: #2a73e8; 
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: 0.2s;
+}
+
+.btn-completar:hover {
+    background: #7cb8ff;
 }
 
 /* Badges */
