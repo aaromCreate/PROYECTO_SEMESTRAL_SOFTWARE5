@@ -130,6 +130,19 @@ body {
   font-size: .9rem;
 }
 
+.hospital-item {
+    cursor: pointer;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+    transition: all 0.2s;
+}
+.hospital-item:hover { background: #f0f8ff; }
+.hospital-item.active { 
+    background: #e3f2fd;
+    border-left: 4px solid #007bff;
+}
+
 /* Cards */
 .card {
   background: radial-gradient(800px 500px at 100% 0%, #0f1a35 0%, var(--surface) 60%);
