@@ -20,6 +20,7 @@
       <a class="nav-link" href="pacientes.html">Pacientes</a>
       <a class="nav-link active" href="medicamentos.html">Medicamentos</a>
       <a class="nav-link" href="hospitales.html">Hospitales</a>
+      <button class="nav-link danger" id="logoutBtn">Salir</button>
     </nav>
   </header>
   <main class="app-main">
@@ -49,30 +50,7 @@
               </tr>
             </thead>
             <tbody id="medBody">
-              <tr>
-                <td>Losartán 50 mg</td>
-                <td>Con receta</td>
-                <td><span class="badge success">En stock</span></td>
-                <td>Hospital Santo Tomás</td>
-              </tr>
-              <tr>
-                <td>Metformina 850 mg</td>
-                <td>Con receta</td>
-                <td><span class="badge warn">Bajo stock</span></td>
-                <td>Policlínica Colón</td>
-              </tr>
-              <tr>
-                <td>Omeprazol 20 mg</td>
-                <td>Venta libre</td>
-                <td><span class="badge danger">Agotado</span></td>
-                <td>Hospital de David</td>
-              </tr>
-              <tr>
-                <td>Paracetamol 500 mg</td>
-                <td>Venta libre</td>
-                <td><span class="badge success">En stock</span></td>
-                <td>Hospital Anita Moreno</td>
-              </tr>
+              <tr><td colspan="4">Cargando el inventario global...</td></tr>
             </tbody>
           </table>
         </div>
@@ -87,6 +65,7 @@
   <footer class="app-footer">
     <p>© <span id="year"></span> Caja de Seguro Social de Panamá — Portal Médico</p>
   </footer>
-  <script src="js/medicamentos.js"></script>
+  <script type="module" src="js/api.js"></script>
+  <script type="module" src="js/medicamentos.js"></script>
 </body>
 </html>

@@ -20,6 +20,7 @@
       <a class="nav-link" href="pacientes.html">Pacientes</a>
       <a class="nav-link" href="medicamentos.html">Medicamentos</a>
       <a class="nav-link active" href="hospitales.html">Hospitales</a>
+      <button class="nav-link danger" id="logoutBtn">Salir</button>
     </nav>
   </header>
   <main class="app-main">
@@ -27,15 +28,11 @@
       <h2>Hospitales de la Caja de Seguro Social</h2>
       <article class="card">
         <ul class="list" id="hospitalList">
-          <li data-hospital="santo-tomas"><strong>Hospital Santo Tomás</strong> — Ciudad de Panamá</li>
-          <li data-hospital="david"><strong>Hospital de David</strong> — Chiriquí</li>
-          <li data-hospital="colon"><strong>Policlínica Colón</strong> — Colón</li>
-          <li data-hospital="anita-moreno"><strong>Hospital Anita Moreno</strong> — Los Santos</li>
-          <li data-hospital="susana-jones"><strong>Hospital Susana Jones</strong> — Panamá Oeste</li>
+          <li>Cargando lista de hospitales...</li>
         </ul>
       </article>
       <article class="card" id="medicamentosHospital">
-        <h3>Medicamentos disponibles</h3>
+        <h3>Inventario de medicamentos en el Hospital</h3>
         <div class="table-wrap">
           <table class="table">
             <thead>
@@ -56,6 +53,7 @@
   <footer class="app-footer">
     <p>© <span id="year"></span> Caja de Seguro Social de Panamá — Portal Médico</p>
   </footer>
-  <script src="js/hospitales.js"></script>
+  <script type="module" src="js/api.js"></script>
+  <script type="module" src="js/hospitales.js"></script>
 </body>
 </html>
