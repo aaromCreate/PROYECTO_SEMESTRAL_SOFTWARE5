@@ -4,7 +4,7 @@
  * URL Base de la API de .NET Core.
  * IMPORTANTE: Asegúrate de que el puerto (ej: 7137) sea el mismo que usa tu API.
  */
-export const API_BASE_URL = "https://localhost:7137/api/";
+export const API_BASE_URL = "http://localhost:5000/api/";
 
 // ----------------------------------------------------------------------
 // FUNCIONES DE AUTENTICACIÓN Y SESIÓN

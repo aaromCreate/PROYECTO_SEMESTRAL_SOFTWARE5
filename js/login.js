@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const API_URL = "https://localhost:7137/api/Medicos";
-    
+    const API_MEDICO = "http://localhost:5000/api/Medicos";
+    const API_PACIENTE = "http://localhost:5000/api/Pacientes";
+
     // Obtener elementos del DOM
     const year = document.querySelector("#year");
     const form = document.querySelector("#loginForm");
@@ -12,18 +13,23 @@ document.addEventListener("DOMContentLoaded", () => {
     // Asignar año actual al footer
     if (year) year.textContent = new Date().getFullYear();
 
-    // Función para manejar el estado del formulario (deshabilitar/habilitar)
-    const setFormState = (enabled, message = "") => {
+    // Función para habilitar/deshabilitar el formulario y mostrar mensaje
+    const setFormState = (enabled, message = "", color = "#fecaca") => {
         submitButton.disabled = !enabled;
         idInput.disabled = !enabled;
         pwdInput.disabled = !enabled;
         errorDisplay.textContent = message;
-        errorDisplay.style.display = message ? 'block' : 'none';
+        errorDisplay.style.color = color;
+        errorDisplay.style.display = message ? "block" : "none";
     };
+
+    // Función para validar login en una lista de usuarios
+    const findUser = (lista, correo, contrasena) =>
+        lista.find(u => u.correo === correo && u.contrasena === contrasena);
 
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
-        setFormState(false, "Iniciando sesión...");
+        setFormState(false, "Iniciando sesión...", "#facc15"); // amarillo claro
 
         const correo = idInput.value.trim();
         const contrasena = pwdInput.value.trim();
@@ -34,44 +40,62 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         try {
-            // 1. Obtener la lista de médicos
-            const response = await fetch(API_URL);
+            // Obtener listas de médicos y pacientes simultáneamente
+            const [resMedico, resPaciente] = await Promise.all([
+                fetch(API_MEDICO),
+                fetch(API_PACIENTE)
+            ]);
 
-            if (!response.ok) {
-                throw new Error(`Error HTTP: ${response.status} (${response.statusText})`);
+            if (!resMedico.ok || !resPaciente.ok) {
+                throw new Error(`Error HTTP: ${resMedico.status}/${resPaciente.status}`);
             }
 
-            const medicos = await response.json();
-            
-            // 2. Buscar al médico que coincide con las credenciales
-            // NOTA: Usamos 'correo' para el campo 'idMedico' ya que es lo más lógico para login
-            const medicoLogueado = medicos.find(m => 
-                m.correo === correo && m.contrasena === contrasena
-            );
+            // Convertir respuesta a JSON
+            const medicosJSON = await resMedico.json();
+            const pacientesJSON = await resPaciente.json();
+
+            // Asegurarnos que sean arrays
+            const medicos = Array.isArray(medicosJSON) ? medicosJSON : medicosJSON.data || [];
+            const pacientes = Array.isArray(pacientesJSON) ? pacientesJSON : pacientesJSON.data || [];
+
+            // Buscar usuario en cada lista
+            const medicoLogueado = findUser(medicos, correo, contrasena);
+            const pacienteLogueado = findUser(pacientes, correo, contrasena);
 
             if (medicoLogueado) {
-                // Login exitoso
-                setFormState(true, `Bienvenido, Dr(a). ${medicoLogueado.nombre} ${medicoLogueado.apellido}. Redirigiendo...`);
-                errorDisplay.style.color = '#86efac'; // Color verde claro
+                setFormState(
+                    true,
+                    `Bienvenido, Dr(a). ${medicoLogueado.nombre} ${medicoLogueado.apellido}. Redirigiendo...`,
+                    "#86efac"
+                );
+                localStorage.setItem("medicoId", medicoLogueado.id || medicoLogueado.Id);
 
-                // 3. Almacenar el ID del médico para usarlo en otras páginas
-                localStorage.setItem('medicoId', medicoLogueado.id || medicoLogueado.Id);
-                
-                // Redirigir a la página principal de la aplicación (que sería la de citas)
                 setTimeout(() => {
-                    window.location.href = "credenciales.html"; 
-                }, 1000); 
+                    window.location.href = "credencialesM.html";
+                }, 1000);
+
+            } else if (pacienteLogueado) {
+                setFormState(
+                    true,
+                    `Bienvenido, ${pacienteLogueado.nombre} ${pacienteLogueado.apellido}. Redirigiendo...`,
+                    "#86efac"
+                );
+                localStorage.setItem("medicoId", pacienteLogueado.id || pacienteLogueado.Id);
+
+                setTimeout(() => {
+                    window.location.href = "credencialesP.html";
+                }, 1000);
 
             } else {
-                // Credenciales incorrectas
                 setFormState(true, "Credenciales incorrectas. Verifica tu correo/ID y contraseña.");
-                errorDisplay.style.color = '#fecaca'; // Color rojo
             }
 
         } catch (error) {
-            console.error('Error de conexión o API:', error);
-            setFormState(true, `Error al conectar con el servidor: ${error.message}. Asegúrate de que la API esté corriendo en ${API_URL}`);
-            errorDisplay.style.color = '#fecaca'; // Color rojo
+            console.error("Error de conexión o API:", error);
+            setFormState(
+                true,
+                `Error al conectar con el servidor: ${error.message}. Asegúrate de que las APIs estén corriendo en ${API_MEDICO} y ${API_PACIENTE}`
+            );
         }
     });
 });
