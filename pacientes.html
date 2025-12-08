@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pacientes asignados</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand">
+      <span class="brand-logo">⚕️</span>
+      <div class="brand-text">
+        <strong>CSS Panamá</strong>
+        <small>Portal Médico</small>
+      </div>
+    </div>
+    <nav class="nav">
+      <a class="nav-link" href="credenciales.html">Credenciales</a>
+      <a class="nav-link active" href="pacientes.html">Pacientes</a>
+      <a class="nav-link" href="medicamentos.html">Medicamentos</a>
+      <a class="nav-link" href="hospitales.html">Hospitales</a>
+    </nav>
+  </header>
+  <main class="app-main">
+    <section class="panel active">
+      <h2>Pacientes asignados</h2>
+      <div class="table-wrap">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Cédula</th>
+              <th>Edad</th>
+              <th>Motivo</th>
+              <th>Fecha cita</th>
+            </tr>
+          </thead>
+          <tbody id="pacientesBody">
+            <tr>
+              <td>María Gómez</td>
+              <td>8-456-789</td>
+              <td>45</td>
+              <td>Hipertensión</td>
+              <td>2025-12-10</td>
+            </tr>
+            <tr>
+              <td>Carlos Rodríguez</td>
+              <td>3-123-456</td>
+              <td>60</td>
+              <td>Diabetes</td>
+              <td>2025-12-12</td>
+            </tr>
+            <tr>
+              <td>Ana Torres</td>
+              <td>9-987-654</td>
+              <td>35</td>
+              <td>Consulta general</td>
+              <td>2025-12-15</td>
+            </tr>
+            <tr>
+              <td>José Martínez</td>
+              <td>2-321-789</td>
+              <td>50</td>
+              <td>Chequeo post-operatorio</td>
+              <td>2025-12-20</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+  <footer class="app-footer">
+    <p>© <span id="year"></span> Caja de Seguro Social de Panamá — Portal Médico</p>
+  </footer>
+  <script src="js/pacientes.js"></script>
+</body>
+</html>

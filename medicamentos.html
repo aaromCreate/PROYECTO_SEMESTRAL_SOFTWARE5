@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Medicamentos disponibles</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand">
+      <span class="brand-logo">⚕️</span>
+      <div class="brand-text">
+        <strong>CSS Panamá</strong>
+        <small>Portal Médico</small>
+      </div>
+    </div>
+    <nav class="nav">
+      <a class="nav-link" href="credenciales.html">Credenciales</a>
+      <a class="nav-link" href="pacientes.html">Pacientes</a>
+      <a class="nav-link active" href="medicamentos.html">Medicamentos</a>
+      <a class="nav-link" href="hospitales.html">Hospitales</a>
+    </nav>
+  </header>
+  <main class="app-main">
+    <section class="panel active">
+      <h2>Medicamentos disponibles para recetar</h2>
+      <div class="card">
+        <div class="toolbar">
+          <div class="search">
+            <input type="search" id="medSearch" placeholder="Buscar por nombre o principio activo…" aria-label="Buscar medicamento" />
+          </div>
+          <div class="filters">
+            <select id="medFilter">
+              <option value="todos">Todos</option>
+              <option value="receta">Con receta</option>
+              <option value="otc">Venta libre</option>
+            </select>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Medicamento</th>
+                <th>Tipo</th>
+                <th>Disponibilidad</th>
+                <th>Hospital</th>
+              </tr>
+            </thead>
+            <tbody id="medBody">
+              <tr>
+                <td>Losartán 50 mg</td>
+                <td>Con receta</td>
+                <td><span class="badge success">En stock</span></td>
+                <td>Hospital Santo Tomás</td>
+              </tr>
+              <tr>
+                <td>Metformina 850 mg</td>
+                <td>Con receta</td>
+                <td><span class="badge warn">Bajo stock</span></td>
+                <td>Policlínica Colón</td>
+              </tr>
+              <tr>
+                <td>Omeprazol 20 mg</td>
+                <td>Venta libre</td>
+                <td><span class="badge danger">Agotado</span></td>
+                <td>Hospital de David</td>
+              </tr>
+              <tr>
+                <td>Paracetamol 500 mg</td>
+                <td>Venta libre</td>
+                <td><span class="badge success">En stock</span></td>
+                <td>Hospital Anita Moreno</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="legend">
+          <span class="badge success">En stock</span>
+          <span class="badge warn">Bajo stock</span>
+          <span class="badge danger">Agotado</span>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="app-footer">
+    <p>© <span id="year"></span> Caja de Seguro Social de Panamá — Portal Médico</p>
+  </footer>
+  <script src="js/medicamentos.js"></script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hospitales CSS</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand">
+      <span class="brand-logo">⚕️</span>
+      <div class="brand-text">
+        <strong>CSS Panamá</strong>
+        <small>Portal Médico</small>
+      </div>
+    </div>
+    <nav class="nav">
+      <a class="nav-link" href="credenciales.html">Credenciales</a>
+      <a class="nav-link" href="pacientes.html">Pacientes</a>
+      <a class="nav-link" href="medicamentos.html">Medicamentos</a>
+      <a class="nav-link active" href="hospitales.html">Hospitales</a>
+    </nav>
+  </header>
+  <main class="app-main">
+    <section class="panel active">
+      <h2>Hospitales de la Caja de Seguro Social</h2>
+      <article class="card">
+        <ul class="list" id="hospitalList">
+          <li data-hospital="santo-tomas"><strong>Hospital Santo Tomás</strong> — Ciudad de Panamá</li>
+          <li data-hospital="david"><strong>Hospital de David</strong> — Chiriquí</li>
+          <li data-hospital="colon"><strong>Policlínica Colón</strong> — Colón</li>
+          <li data-hospital="anita-moreno"><strong>Hospital Anita Moreno</strong> — Los Santos</li>
+          <li data-hospital="susana-jones"><strong>Hospital Susana Jones</strong> — Panamá Oeste</li>
+        </ul>
+      </article>
+      <article class="card" id="medicamentosHospital">
+        <h3>Medicamentos disponibles</h3>
+        <div class="table-wrap">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Medicamento</th>
+                <th>Tipo</th>
+                <th>Disponibilidad</th>
+              </tr>
+            </thead>
+            <tbody id="medHospitalBody">
+              <tr><td colspan="3">Selecciona un hospital para ver sus medicamentos.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+    </section>
+  </main>
+  <footer class="app-footer">
+    <p>© <span id="year"></span> Caja de Seguro Social de Panamá — Portal Médico</p>
+  </footer>
+  <script src="js/hospitales.js"></script>
+</body>
+</html>
