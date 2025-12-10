@@ -32,29 +32,24 @@ document.addEventListener("DOMContentLoaded", () => {
     const pacienteIDLogeado = localStorage.getItem("pacienteId");
 
     if (pacienteIDLogeado) {
-    const intervalo = setInterval(() => {
+        const intervalo = setInterval(() => {
+            if (pacientes.length > 0) {
+                const p = pacientes.find(x => x.id == pacienteIDLogeado);
 
-        // Esperar a que los pacientes estén cargados
-        if (pacientes.length > 0) {
+                if (p) {
+                    const pacienteInput = document.getElementById("pacienteInput");
 
-            const p = pacientes.find(x => x.id == pacienteIDLogeado);
-
-            if (p) {
-                const pacienteInput = document.getElementById("pacienteInput");
-
-                if (pacienteInput) {
-                    pacienteInput.value = `${p.nombre} ${p.apellido}`;
-                    pacienteSeleccionado = p.id;   // ← IMPORTANTE
-                    pacienteInput.disabled = true; // opcional
-                    console.log("Paciente autocompletado por login:", p);
+                    if (pacienteInput) {
+                        pacienteInput.value = `${p.nombre} ${p.apellido}`;
+                        pacienteSeleccionado = p.id;
+                        pacienteInput.disabled = true;
+                        console.log("Paciente autocompletado por login:", p);
+                    }
                 }
+                clearInterval(intervalo);
             }
-
-            clearInterval(intervalo);
-        }
-
-    }, 100); // revisa cada 100ms hasta que carguen los pacientes
-}
+        }, 100);
+    }
 
     // ======================
     // Cargar médicos (combobox)
@@ -119,11 +114,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function mostrarSugerencias(lista) {
-        // Eliminar sugerencias anteriores
         let box = document.getElementById("sugerenciasPacientes");
         if (box) box.remove();
 
-        // Caja nueva
         box = document.createElement("div");
         box.id = "sugerenciasPacientes";
         box.style.border = "1px solid #aaa";
@@ -160,10 +153,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const medico = medicos.find(m => m.id == medicoId);
         if (!medico) return { valido: false, mensaje: "Médico no encontrado." };
 
-        const entrada = medico.horaEntrada; // "08:00:00"
-        const salida = medico.horaSalida;   // "16:00:00"
+        const entrada = medico.horaEntrada;
+        const salida = medico.horaSalida;
 
-        const horaUsuario = fechaCita.split("T")[1] + ":00"; // "08:45:00"
+        const horaUsuario = fechaCita.split("T")[1] + ":00";
 
         if (horaUsuario < entrada || horaUsuario > salida) {
             return {
@@ -171,8 +164,28 @@ document.addEventListener("DOMContentLoaded", () => {
                 mensaje: `El médico atiende entre ${entrada} y ${salida}.`
             };
         }
-
         return { valido: true };
+    }
+
+    // ==========================================================
+    // NUEVO: FUNCION ANTISPAM — EVITAR CITAS DUPLICADAS
+    // ==========================================================
+    async function verificarConflictoCita(pacienteId, fechaCita) {
+        try {
+            const res = await fetch(`${API_CITAS}?pacienteId=${pacienteId}`);
+            if (!res.ok) return false;
+
+            const json = await res.json();
+            const citas = json.data || json;
+
+            const fechaNormal = fechaCita.replace(":00.000Z", "");
+
+            return citas.some(c => c.fechaCita.startsWith(fechaNormal));
+        }
+        catch (err) {
+            console.error("Error verificando conflicto:", err);
+            return false;
+        }
     }
 
     // ======================
@@ -183,10 +196,10 @@ document.addEventListener("DOMContentLoaded", () => {
         btnAgendar.addEventListener("click", async (e) => {
             e.preventDefault();
 
-            const medicoId = document.getElementById("medicoId") ? document.getElementById("medicoId").value : null;
-            const clinicaId = document.getElementById("clinicaId") ? document.getElementById("clinicaId").value : null;
-            const fechaCita = document.getElementById("fechaCita") ? document.getElementById("fechaCita").value : null;
-            const motivo = document.getElementById("motivo") ? document.getElementById("motivo").value : "";
+            const medicoId = document.getElementById("medicoId")?.value;
+            const clinicaId = document.getElementById("clinicaId")?.value;
+            const fechaCita = document.getElementById("fechaCita")?.value;
+            const motivo = document.getElementById("motivo")?.value || "";
 
             const resultado = document.getElementById("resultado");
             if (resultado) resultado.textContent = "";
@@ -211,6 +224,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (resultado) resultado.textContent = "❌ " + validar.mensaje;
                 return;
             }
+
+            // ==========================================================
+            // NUEVO: Validación antibasura — evitar citas duplicadas
+            // ==========================================================
+            const hayConflicto = await verificarConflictoCita(pacienteSeleccionado, fechaCita);
+            if (hayConflicto) {
+                if (resultado) resultado.textContent = "❌ Ya existe una cita programada en esa fecha y hora.";
+                return;
+            }
+            // ==========================================================
 
             const cita = {
                 pacienteId: pacienteSeleccionado,
@@ -237,22 +260,17 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
         });
-    } else {
-        console.log("Aviso: #btnAgendar no existe en el HTML.");
     }
 
     // ======================
-    // Logout (Cerrar sesión)
+    // Logout
     // ======================
     const logoutBtn = document.getElementById("logoutBtn");
     if (logoutBtn) {
         logoutBtn.addEventListener("click", () => {
             localStorage.clear();
-
             window.location.href = "index.html";
         });
-    } else {
-        console.log("Aviso: #logoutBtn no existe en el HTML.");
     }
 
 });

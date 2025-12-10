@@ -379,6 +379,83 @@ body {
   .search input[type="search"], .filters select, .form-field input { background: #fff }
   .table thead th { background: linear-gradient(180deg, #f3f6fb, #eef3fb) }
 }
+
+/* Recetas */
+
+#formReceta {
+  background: radial-gradient(800px 500px at 100% 0%, #0f1a35 0%, var(--surface) 60%);
+  padding: 28px 26px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  display: grid;
+  gap: 18px;
+  max-width: 520px;
+  margin: 0 auto;
+  animation: fadeIn .4s ease-out;
+}
+
+#formReceta label {
+  font-weight: 600;
+  color: var(--muted);
+  margin-bottom: -6px;
+}
+
+#formReceta input,
+#formReceta select {
+  padding: 12px 14px;
+  border-radius: var(--radius-xs);
+  border: 1px solid var(--border);
+  background: #0c1326;
+  color: var(--on-surface);
+  font-size: 1rem;
+  transition: all .25s ease;
+  width: 100%;
+}
+
+#formReceta input:focus,
+#formReceta select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(45,127,249,.25);
+  outline: none;
+}
+
+#stockInfo{
+  margin-top: 10px;
+}
+
+/* Botón generar receta */
+#generarReceta {
+  background: linear-gradient(180deg, var(--primary), var(--primary-700));
+  border: 1px solid rgba(45,127,249,0.35);
+  padding: 12px 18px;
+  border-radius: var(--radius-sm);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: .25s;
+  width: 100%;
+  box-shadow: 0 10px 24px rgba(45,127,249,.25);
+  margin-top: 20px;
+}
+
+#generarReceta:hover {
+  background: linear-gradient(180deg, var(--primary-700), var(--primary));
+  transform: translateY(-1px);
+}
+
+#generarReceta:active {
+  transform: translateY(1px);
+}
+
+.app-main h2{
+  text-align: center;
+}
+
+body, .app-main {
+    background: #0c1326 !important;
+}
 /* ======== FORMULARIO DE AGENDAR CITA (ESTILO PREMIUM) ======== */
 
 #formCita {

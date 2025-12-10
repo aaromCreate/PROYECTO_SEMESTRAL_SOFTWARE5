@@ -47,8 +47,6 @@ async function loadMedicoData(id) {
     }
 }
 
-
-
 const API_PACIENTE = "https://localhost:7137/api/Pacientes";
 
 document.addEventListener("DOMContentLoaded", async () => {
