@@ -99,13 +99,13 @@ function crearFilaTabla(tableBody, cita, paciente) {
     // ======================
     const accionCell = row.insertCell();
     const btn = document.createElement("button");
-    btn.textContent = "Completar";
+    btn.textContent = "🗒️ Completar";
     btn.classList.add("btn-completar");
 
     // Si ya está completa, desactivar el botón
     if (cita.estado?.toLowerCase() === "completa") {
         btn.disabled = true;
-        btn.textContent = "Completada";
+        btn.textContent = "✅ Completada";
     }
 
     // Evento del botón
@@ -146,7 +146,7 @@ async function completarCita(cita, fila) {
         // Actualizar visualmente la fila sin recargar
         fila.cells[4].textContent = "completa";
         const btn = fila.cells[5].querySelector("button");
-        btn.textContent = "Completada";
+        btn.textContent = "✅ Completada";
         btn.disabled = true;
 
         alert("La cita fue marcada como COMPLETA.");
