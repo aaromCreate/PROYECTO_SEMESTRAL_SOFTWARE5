@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Receta Médica</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand">
+      <span class="brand-logo">⚕️</span>
+      <div class="brand-text">
+        <strong>CSS Panamá</strong>
+        <small>Receta Médica</small>
+      </div>
+    </div>
+    <nav class="nav">
+  <a class="nav-link" href="medicamentos.html">← Medicamentos</a>
+  <a class="nav-link" href="pacientes.html">Pacientes</a>
+  <a class="nav-link" href="medicamentos.html">Medicamentos</a>
+  <a class="nav-link active" href="recetas.html">Recetas</a>
+  <a class="nav-link" href="hospitales.html">Hospitales</a>
+  <button class="nav-link danger" id="logoutBtn">Salir</button>
+</nav>
+  </header>
+  
+  <main class="app-main">
+    <section class="panel active">
+      <h2>Nueva Receta</h2>
+      
+      <div class="card">
+        <div class="form-group">
+          <label>Medicamento:</label>
+          <input type="text" id="medNombre" readonly />
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label>Paciente ID:</label>
+            <input type="number" id="pacienteId" placeholder="ID del paciente" required />
+          </div>
+          <div class="form-group">
+            <label>Clínica ID:</label>
+            <input type="number" id="clinicaId" placeholder="ID de la clínica" required />
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label>Cantidad:</label>
+          <input type="number" id="cantidad" min="1" max="100" value="1" required />
+        </div>
+        
+        <div class="form-actions">
+          <button class="btn primary" id="generarReceta">🩺 Generar Receta</button>
+          <button class="btn secondary" id="imprimirBtn" style="display:none;">🖨️ Imprimir</button>
+        </div>
+      </div>
+      
+      <!-- Comprobante -->
+      <div id="comprobante" class="card" style="display:none; margin-top: 2rem;">
+        <h3> Receta Generada</h3>
+        <div id="comprobanteContent"></div>
+      </div>
+    </section>
+  </main>
+  
+  <script type="module" src="js/api.js"></script>
+  <script type="module" src="js/recetas.js"></script>
+</body>
+</html>

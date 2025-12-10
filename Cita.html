@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CSS Panamá — Portal Paciente</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body>
+  <header class="app-header">
+    <div class="brand">
+      <span class="brand-logo">⚕️</span>
+      <div class="brand-text">
+        <strong>CSS Panamá</strong>
+        <small>Portal Paciente</small>
+      </div>
+    </div>
+    <nav class="nav">
+      <a class="nav-link active" href="credencialesP.html">Credenciales</a>
+      <a class="nav-link active" href="Cita.html">Cita</a>
+
+      <button class="nav-link danger" id="logoutBtn">Salir</button>
+    </nav>
+  </header>
+
+  <main class="app-main">
+    <form id="formCita">
+
+      <label>Paciente:</label>
+      <div style="position: relative;">
+        <input type="text" id="pacienteInput" placeholder="Escribe el nombre del paciente" autocomplete="on">
+      </div>
+
+      <label>Médico:</label>
+      <select id="medicoId" required></select>
+
+      <label>Clínica:</label>
+      <select id="clinicaId" required></select>
+
+      <label>Fecha y hora:</label>
+      <input type="datetime-local" id="fechaCita" required />
+
+      <label>Motivo:</label>
+      <input type="text" id="motivo" required />
+
+      <label>Estado:</label>
+      <input type="text" id="estado" value="programada" readonly />
+
+      <br><br>
+      <button id="btnAgendar" type="submit">Guardar Cita</button>
+    </form>
+
+    <p id="resultado"></p>
+  </main>
+
+  <footer class="app-footer">
+    <p>© <span id="year"></span> Caja de Seguro Social de Panamá</p>
+  </footer>
+
+  <script src="js/AgendarCita.js"></script>
+
+</body>
+</html>

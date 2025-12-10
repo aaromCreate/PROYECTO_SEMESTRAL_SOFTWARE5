@@ -16,10 +16,11 @@
       </div>
     </div>
     <nav class="nav">
-      <a class="nav-link" href="credenciales.html">Credenciales</a>
+      <a class="nav-link" href="credencialesM.html">Credenciales</a>
       <a class="nav-link active" href="pacientes.html">Pacientes</a>
       <a class="nav-link" href="medicamentos.html">Medicamentos</a>
       <a class="nav-link" href="hospitales.html">Hospitales</a>
+      <button class="nav-link danger" id="logoutBtn">Salir</button>
     </nav>
   </header>
   <main class="app-main">
@@ -30,41 +31,14 @@
           <thead>
             <tr>
               <th>Nombre</th>
-              <th>Cédula</th>
-              <th>Edad</th>
-              <th>Motivo</th>
+              <th>Fecha Nacimiento</th> <th>Motivo</th>
               <th>Fecha cita</th>
+              <th>Estado</th>
+              <th>Completar</th>
             </tr>
           </thead>
           <tbody id="pacientesBody">
-            <tr>
-              <td>María Gómez</td>
-              <td>8-456-789</td>
-              <td>45</td>
-              <td>Hipertensión</td>
-              <td>2025-12-10</td>
-            </tr>
-            <tr>
-              <td>Carlos Rodríguez</td>
-              <td>3-123-456</td>
-              <td>60</td>
-              <td>Diabetes</td>
-              <td>2025-12-12</td>
-            </tr>
-            <tr>
-              <td>Ana Torres</td>
-              <td>9-987-654</td>
-              <td>35</td>
-              <td>Consulta general</td>
-              <td>2025-12-15</td>
-            </tr>
-            <tr>
-              <td>José Martínez</td>
-              <td>2-321-789</td>
-              <td>50</td>
-              <td>Chequeo post-operatorio</td>
-              <td>2025-12-20</td>
-            </tr>
+            <tr><td colspan="6">Cargando pacientes...</td></tr>
           </tbody>
         </table>
       </div>
@@ -73,6 +47,8 @@
   <footer class="app-footer">
     <p>© <span id="year"></span> Caja de Seguro Social de Panamá — Portal Médico</p>
   </footer>
-  <script src="js/pacientes.js"></script>
+  
+  <script type="module" src="js/api.js"></script>
+  <script type="module" src="js/pacientes.js"></script>
 </body>
 </html>

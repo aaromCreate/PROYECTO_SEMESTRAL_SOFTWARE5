@@ -15,23 +15,25 @@
         <small>Portal Médico</small>
       </div>
     </div>
-    <nav class="nav">
-      <a class="nav-link active" href="credenciales.html">Credenciales</a>
-      <a class="nav-link" href="pacientes.html">Pacientes</a>
-      <a class="nav-link" href="medicamentos.html">Medicamentos</a>
-      <a class="nav-link" href="hospitales.html">Hospitales</a>
-    </nav>
+   <nav class="nav">
+  <a class="nav-link" href="credenciales.html">Credenciales</a>
+  <a class="nav-link" href="pacientes.html">Pacientes</a>
+  <a class="nav-link" href="medicamentos.html">Medicamentos</a>
+  <a class="nav-link" href="recetas.html">Recetas</a>
+  <a class="nav-link" href="hospitales.html">Hospitales</a>
+  <button class="nav-link danger" id="logoutBtn">Salir</button>
+</nav>
   </header>
   <main class="app-main">
     <section class="panel active">
       <h2>Credenciales del médico</h2>
       <article class="card">
-        <ul class="list">
-          <li><strong>Nombre:</strong> Dr. Juan Pérez</li>
-          <li><strong>ID Médico:</strong> MED-2025-001</li>
-          <li><strong>Especialidad:</strong> Medicina Interna</li>
-          <li><strong>Correo:</strong> juan.perez@css.gob.pa</li>
-          <li><strong>Teléfono:</strong> +507 6000-1234</li>
+        <ul class="list" id="medicoDetails">
+          <li><strong>Nombre:</strong> <span id="medico-nombre">Cargando...</span></li>
+          <li><strong>ID Médico:</strong> <span id="medico-id">Cargando...</span></li>
+          <li><strong>Especialidad:</strong> <span id="medico-especialidad">Cargando...</span></li>
+          <li><strong>Correo:</strong> <span id="medico-correo">Cargando...</span></li>
+          <li><strong>Teléfono:</strong> <span id="medico-telefono">Cargando...</span></li>
         </ul>
       </article>
     </section>
@@ -39,6 +41,7 @@
   <footer class="app-footer">
     <p>© <span id="year"></span> Caja de Seguro Social de Panamá — Portal Médico</p>
   </footer>
-  <script src="js/navbar.js"></script>
+  <script type="module" src="js/api.js"></script>
+  <script type="module" src="js/credenciales.js"></script>
 </body>
 </html>

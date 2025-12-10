@@ -16,11 +16,13 @@
       </div>
     </div>
     <nav class="nav">
-      <a class="nav-link" href="credenciales.html">Credenciales</a>
-      <a class="nav-link" href="pacientes.html">Pacientes</a>
-      <a class="nav-link active" href="medicamentos.html">Medicamentos</a>
-      <a class="nav-link" href="hospitales.html">Hospitales</a>
-    </nav>
+  <a class="nav-link" href="credencialesM.html">Credenciales</a>
+  <a class="nav-link" href="pacientes.html">Pacientes</a>
+  <a class="nav-link" href="medicamentos.html">Medicamentos</a>
+  <a class="nav-link" href="recetas.html">Recetas</a>
+  <a class="nav-link" href="hospitales.html">Hospitales</a>
+  <button class="nav-link danger" id="logoutBtn">Salir</button>
+</nav>
   </header>
   <main class="app-main">
     <section class="panel active">
@@ -40,39 +42,17 @@
         </div>
         <div class="table-wrap">
           <table class="table">
-            <thead>
-              <tr>
-                <th>Medicamento</th>
-                <th>Tipo</th>
-                <th>Disponibilidad</th>
-                <th>Hospital</th>
-              </tr>
-            </thead>
-            <tbody id="medBody">
-              <tr>
-                <td>Losartán 50 mg</td>
-                <td>Con receta</td>
-                <td><span class="badge success">En stock</span></td>
-                <td>Hospital Santo Tomás</td>
-              </tr>
-              <tr>
-                <td>Metformina 850 mg</td>
-                <td>Con receta</td>
-                <td><span class="badge warn">Bajo stock</span></td>
-                <td>Policlínica Colón</td>
-              </tr>
-              <tr>
-                <td>Omeprazol 20 mg</td>
-                <td>Venta libre</td>
-                <td><span class="badge danger">Agotado</span></td>
-                <td>Hospital de David</td>
-              </tr>
-              <tr>
-                <td>Paracetamol 500 mg</td>
-                <td>Venta libre</td>
-                <td><span class="badge success">En stock</span></td>
-                <td>Hospital Anita Moreno</td>
-              </tr>
+           <thead>
+  <tr>
+    <th>Medicamento</th>
+    <th>Tipo</th>
+    <th>Precio</th>
+    <th>Descripción</th>
+    <th>Acción</th>
+  </tr>
+</thead>
+<tbody id="medBody">
+              <tr><td colspan="5">Cargando el inventario global...</td></tr>
             </tbody>
           </table>
         </div>
@@ -87,6 +67,7 @@
   <footer class="app-footer">
     <p>© <span id="year"></span> Caja de Seguro Social de Panamá — Portal Médico</p>
   </footer>
-  <script src="js/medicamentos.js"></script>
+  <script type="module" src="js/api.js"></script>
+  <script type="module" src="js/medicamentos.js"></script>
 </body>
 </html>
