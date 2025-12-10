@@ -27,6 +27,36 @@ document.addEventListener("DOMContentLoaded", () => {
         .catch(err => console.error("Error pacientes:", err));
 
     // ======================
+    // Autocompletar paciente logeado
+    // ======================
+    const pacienteIDLogeado = localStorage.getItem("pacienteId");
+
+    if (pacienteIDLogeado) {
+    const intervalo = setInterval(() => {
+
+        // Esperar a que los pacientes estén cargados
+        if (pacientes.length > 0) {
+
+            const p = pacientes.find(x => x.id == pacienteIDLogeado);
+
+            if (p) {
+                const pacienteInput = document.getElementById("pacienteInput");
+
+                if (pacienteInput) {
+                    pacienteInput.value = `${p.nombre} ${p.apellido}`;
+                    pacienteSeleccionado = p.id;   // ← IMPORTANTE
+                    pacienteInput.disabled = true; // opcional
+                    console.log("Paciente autocompletado por login:", p);
+                }
+            }
+
+            clearInterval(intervalo);
+        }
+
+    }, 100); // revisa cada 100ms hasta que carguen los pacientes
+}
+
+    // ======================
     // Cargar médicos (combobox)
     // ======================
     fetch(API_MEDICOS)

@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const year = document.querySelector("#year");
     if (year) year.textContent = new Date().getFullYear();
 
-    const pacienteId = localStorage.getItem("medicoId"); // si guardaste pacienteId, usa ese
+    const pacienteId = localStorage.getItem("pacienteId"); // si guardaste pacienteId, usa ese
     if (!pacienteId) return console.error("No se encontró el ID del paciente en localStorage");
 
     const nombreEl = document.getElementById("paciente-nombre");

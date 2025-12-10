@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     `Bienvenido, ${pacienteLogueado.nombre} ${pacienteLogueado.apellido}. Redirigiendo...`,
                     "#86efac"
                 );
-                localStorage.setItem("medicoId", pacienteLogueado.id || pacienteLogueado.Id);
+                localStorage.setItem("pacienteId", pacienteLogueado.id || pacienteLogueado.Id);
 
                 setTimeout(() => {
                     window.location.href = "credencialesP.html";

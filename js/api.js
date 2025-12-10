@@ -18,6 +18,10 @@ export const getMedicoId = () => {
     return localStorage.getItem('medicoId');
 };
 
+export const getPacienteId = () => {
+    return localStorage.getItem('PacienteId');
+};
+
 /**
  * Verifica si el usuario está logueado. Si no, redirige a la página de login.
  * @returns {string | null} El ID del médico si está logueado, o inicia la redirección.
