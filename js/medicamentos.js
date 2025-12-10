@@ -1,5 +1,3 @@
-// js/medicamentos.js
-
 import { API_BASE_URL, checkLogin } from './api.js';
 
 let allMedicamentos = [];
@@ -16,51 +14,60 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 async function loadAllMedicamentos() {
-    tableBody.innerHTML = '<tr><td colspan="4">Cargando la lista global de medicamentos...</td></tr>';
+    tableBody.innerHTML = '<tr><td colspan="5">Cargando inventario...</td></tr>';
     
-    // NOTA: Asume que tienes un endpoint GET /api/Medicamentos
-    const url = `${API_BASE_URL}Medicamentos`; 
-
     try {
-        const response = await fetch(url);
-        if (!response.ok) {
-            throw new Error(`Error HTTP: ${response.status}`);
-        }
+        const response = await fetch(`${API_BASE_URL}Medicamentos`);
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
         
-        allMedicamentos = await response.json();
+        const data = await response.json();
+        allMedicamentos = data.data || [];
         
         if (allMedicamentos.length === 0) {
-            tableBody.innerHTML = '<tr><td colspan="4">No hay medicamentos registrados en el sistema.</td></tr>';
+            tableBody.innerHTML = '<tr><td colspan="5">No hay medicamentos disponibles.</td></tr>';
             return;
         }
-
+        
         renderMedicamentos(allMedicamentos);
-
     } catch (error) {
-        console.error("Error al obtener medicamentos:", error);
-        tableBody.innerHTML = `<tr><td colspan="4" class="form-error">Error al cargar el inventario: ${error.message}</td></tr>`;
+        console.error("Error:", error);
+        tableBody.innerHTML = `<tr><td colspan="5" class="form-error">Error: ${error.message}</td></tr>`;
     }
 }
 
 function renderMedicamentos(meds) {
-    tableBody.innerHTML = ''; 
+    tableBody.innerHTML = '';
     meds.forEach(m => {
-        // NOTA: Asume campos en el objeto medicamento: nombre, tipo, disponibilidad (string: 'En stock', 'Bajo stock', 'Agotado'), hospital.nombre
-        
-        let estadoClass = '';
-        if (m.disponibilidad === 'En stock') estadoClass = 'success';
-        else if (m.disponibilidad === 'Bajo stock') estadoClass = 'warn';
-        else estadoClass = 'danger';
-        
-        const estadoBadge = `<span class="badge ${estadoClass}">${m.disponibilidad}</span>`;
-        
-        tableBody.innerHTML += `
-            <tr data-tipo="${m.tipo.toLowerCase()}">
-                <td>${m.nombre}</td>
-                <td>${m.tipo}</td>
-                <td>${estadoBadge}</td>
-                <td>${m.hospital ? m.hospital.nombre : 'Central'}</td>
-            </tr>`;
+        const row = tableBody.insertRow();
+        row.innerHTML = `
+            <td>${m.nombre}</td>
+            <td>${m.tipo}</td>
+            <td>${m.precio ? '$' + m.precio.toFixed(2) : 'N/A'}</td>
+            <td>${m.descripcion || 'N/A'}</td>
+            <td>
+                <button class="btn primary btn-small recetar-btn" 
+                        data-id="${m.id}" 
+                        data-nombre="${m.nombre}"
+                        data-tipo="${m.tipo}"
+                        data-precio="${m.precio || 0}">
+                    📋 Recetar
+                </button>
+            </td>
+        `;
+    });
+    
+    // Event listeners para botones recetar
+    document.querySelectorAll('.recetar-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const med = {
+                id: parseInt(e.target.dataset.id),
+                nombre: e.target.dataset.nombre,
+                tipo: e.target.dataset.tipo,
+                precio: parseFloat(e.target.dataset.precio)
+            };
+            localStorage.setItem('medicamentoSeleccionado', JSON.stringify(med));
+            window.location.href = 'recetas.html';
+        });
     });
 }
 
@@ -68,19 +75,13 @@ function applyFilters() {
     const type = filter.value;
     const term = search.value.trim().toLowerCase();
     
-    const filteredMeds = allMedicamentos.filter(m => {
-        const name = m.nombre.toLowerCase();
-        const tipo = m.tipo.toLowerCase();
-        
-        const matchesType =
-            type === "todos" ||
-            (type === "receta" && tipo.includes("receta")) ||
-            (type === "otc" && tipo.includes("venta libre"));
-            
-        const matchesSearch = !term || name.includes(term) || (m.principioActivo && m.principioActivo.toLowerCase().includes(term));
-        
+    const filtered = allMedicamentos.filter(m => {
+        const matchesType = type === "todos" || 
+            (type === "receta" && m.tipo.toLowerCase().includes("receta")) ||
+            (type === "otc" && m.tipo.toLowerCase().includes("venta libre"));
+        const matchesSearch = !term || m.nombre.toLowerCase().includes(term);
         return matchesType && matchesSearch;
     });
-
-    renderMedicamentos(filteredMeds);
+    
+    renderMedicamentos(filtered);
 }

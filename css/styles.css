@@ -87,6 +87,9 @@ body {
   gap: 8px;
   flex-wrap: wrap;
 }
+.nav a {
+  text-decoration: none;
+}
 .nav-link {
   appearance: none;
   border: 1px solid var(--border);
@@ -97,7 +100,7 @@ body {
   cursor: pointer;
   transition: border-color .2s, transform .05s, box-shadow .2s;
 }
-.nav-link:hover { border-color: #38507e }
+.nav-link:hover { border-color: #38597e; }
 .nav-link:active { transform: translateY(1px) }
 .nav-link.active {
   border-color: var(--primary);
@@ -128,6 +131,19 @@ body {
 }
 .panel-subtitle.small {
   font-size: .9rem;
+}
+
+.hospital-item {
+    cursor: pointer;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+    transition: all 0.2s;
+}
+.hospital-item:hover { background: #0b2d4b; }
+.hospital-item.active { 
+    background: #2b343b9f;
+    border-left: 4px solid #007bff;
 }
 
 /* Cards */
@@ -202,7 +218,25 @@ body {
   background: rgba(255,255,255,0.04);
 }
 
-/* Badges */
+.acciones-col {
+    text-align: center;
+}
+
+.btn-completar {
+    background: #2a73e8; 
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: 0.2s;
+}
+
+.btn-completar:hover {
+    background: #7cb8ff;
+}
+
 .badge {
   display: inline-block;
   padding: 4px 10px;
@@ -215,7 +249,6 @@ body {
 .badge.danger { background: rgba(239,68,68,0.15); color: #fecaca; border-color: rgba(239,68,68,0.4) }
 .badge.info { background: rgba(56,189,248,0.15); color: #bae6fd; border-color: rgba(56,189,248,0.4) }
 
-/* Toolbar */
 .toolbar {
   display: flex;
   gap: var(--gap);
@@ -240,7 +273,6 @@ body {
   color: var(--on-surface);
 }
 
-/* Buttons */
 .btn {
   appearance: none;
   border: 1px solid var(--border);
@@ -270,7 +302,6 @@ body {
   color: var(--muted);
 }
 
-/* Forms */
 .form { display: grid; gap: var(--gap) }
 .form-grid {
   display: grid;
@@ -310,14 +341,12 @@ body {
   font-weight: 600;
 }
 
-/* Actions */
 .actions {
   display: flex;
   gap: var(--gap);
   flex-wrap: wrap;
 }
 
-/* Footer */
 .app-footer {
   margin: 40px auto 24px;
   max-width: var(--maxw);
@@ -326,12 +355,10 @@ body {
 }
 .foot-note { font-size: .9rem }
 
-/* Reduced motion preference */
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; animation: none !important; scroll-behavior: auto !important }
 }
 
-/* Light mode support (auto) */
 @media (prefers-color-scheme: light) {
   :root {
     --bg: #f7f9fc;
@@ -347,8 +374,80 @@ body {
   .search input[type="search"], .filters select, .form-field input { background: #fff }
   .table thead th { background: linear-gradient(180deg, #f3f6fb, #eef3fb) }
 }
-/* ======== FORMULARIO DE AGENDAR CITA (ESTILO PREMIUM) ======== */
 
+#formReceta {
+  background: radial-gradient(800px 500px at 100% 0%, #0f1a35 0%, var(--surface) 60%);
+  padding: 28px 26px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  display: grid;
+  gap: 18px;
+  max-width: 520px;
+  margin: 0 auto;
+  animation: fadeIn .4s ease-out;
+}
+
+#formReceta label {
+  font-weight: 600;
+  color: var(--muted);
+  margin-bottom: -6px;
+}
+
+#formReceta input,
+#formReceta select {
+  padding: 12px 14px;
+  border-radius: var(--radius-xs);
+  border: 1px solid var(--border);
+  background: #0c1326;
+  color: var(--on-surface);
+  font-size: 1rem;
+  transition: all .25s ease;
+  width: 100%;
+}
+
+#formReceta input:focus,
+#formReceta select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(45,127,249,.25);
+  outline: none;
+}
+
+#stockInfo{
+  margin-top: 10px;
+}
+
+#generarReceta {
+  background: linear-gradient(180deg, var(--primary), var(--primary-700));
+  border: 1px solid rgba(45,127,249,0.35);
+  padding: 12px 18px;
+  border-radius: var(--radius-sm);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: .25s;
+  width: 100%;
+  box-shadow: 0 10px 24px rgba(45,127,249,.25);
+  margin-top: 20px;
+}
+
+#generarReceta:hover {
+  background: linear-gradient(180deg, var(--primary-700), var(--primary));
+  transform: translateY(-1px);
+}
+
+#generarReceta:active {
+  transform: translateY(1px);
+}
+
+.app-main h2{
+  text-align: center;
+}
+
+body, .app-main {
+    background: #0c1326 !important;
+}
 #formCita {
   background: radial-gradient(800px 500px at 100% 0%, #0f1a35 0%, var(--surface) 60%);
   padding: 28px 26px;
@@ -387,7 +486,6 @@ body {
   outline: none;
 }
 
-/* Botón guardar */
 #btnAgendar {
   background: linear-gradient(180deg, var(--primary), var(--primary-700));
   border: 1px solid rgba(45,127,249,0.35);
@@ -411,14 +509,12 @@ body {
   transform: translateY(1px);
 }
 
-/* Mensaje resultado */
 #resultado {
   margin-top: 10px;
   font-weight: 600;
   text-align: center;
 }
 
-/* Autocomplete */
 .autocomplete-box {
   position: absolute;
   top: 48px;
@@ -444,8 +540,82 @@ body {
   background: rgba(255,255,255,0.07);
 }
 
-/* Suavidad */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(6px); }
   to { opacity: 1; transform: translateY(0); }
+}
+#pacienteForm {
+  background: radial-gradient(
+      800px 500px at 100% 0%,
+      #0f1a35 0%,
+      var(--surface) 60%
+  );
+  padding: 28px 26px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  display: grid;
+  gap: 18px;
+  max-width: 520px;
+  margin: 0 auto;
+  animation: fadeIn .4s ease-out;
+}
+
+#pacienteForm label {
+  font-weight: 600;
+  color: var(--muted);
+  margin-bottom: -6px;
+}
+
+#pacienteForm input {
+  padding: 12px 14px;
+  border-radius: var(--radius-xs);
+  border: 1px solid var(--border);
+  background: #0c1326;
+  color: var(--on-surface);
+  font-size: 1rem;
+  transition: all .25s ease;
+  width: 100%;
+}
+
+#pacienteForm input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(45,127,249,.25);
+  outline: none;
+}
+
+#pacienteForm .btn.primary {
+  background: linear-gradient(180deg, var(--primary), var(--primary-700));
+  border: 1px solid rgba(45,127,249,0.35);
+  padding: 12px 18px;
+  border-radius: var(--radius-sm);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: .25s;
+  width: 100%;
+  box-shadow: 0 10px 24px rgba(45,127,249,.25);
+}
+
+#pacienteForm .btn.primary:hover {
+  background: linear-gradient(180deg, var(--primary-700), var(--primary));
+  transform: translateY(-1px);
+}
+
+#pacienteForm .btn.primary:active {
+  transform: translateY(1px);
+}
+.form-message {
+  text-align: center;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.form-message.success {
+  color: var(--success);
+}
+
+.form-message.error {
+  color: #fecaca;
 }

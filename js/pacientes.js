@@ -7,14 +7,15 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
+// Cargar citas por doctor
 async function loadPacientes(medicoId) {
     const tableBody = document.getElementById('pacientesBody');
-    tableBody.innerHTML = '<tr><td colspan="4">Cargando citas del doctor...</td></tr>';
+    tableBody.innerHTML = '<tr><td colspan="6">Cargando citas del doctor...</td></tr>';
     
     const urlCitas = `${API_BASE_URL}Citas?medicoId=${medicoId}`;
     
     try {
-        // 1. Obtener citas (igual que antes)
+        //Obtener citas 
         const responseCitas = await fetch(urlCitas);
         if (!responseCitas.ok) throw new Error(`Error HTTP: ${responseCitas.status}`);
         
@@ -25,11 +26,11 @@ async function loadPacientes(medicoId) {
         tableBody.innerHTML = '';
         
         if (citas.length === 0) {
-            tableBody.innerHTML = '<tr><td colspan="4">No tiene pacientes asignados para citas próximas.</td></tr>';
+            tableBody.innerHTML = '<tr><td colspan="6">No tiene pacientes asignados para citas próximas.</td></tr>';
             return;
         }
 
-        // 2. Para cada cita, obtener paciente por ID
+        //Para cada cita, obtener paciente por ID 
         for (const cita of citas) {
             try {
                 const pacienteData = await fetch(`${API_BASE_URL}Pacientes/${cita.pacienteId}`);
@@ -48,10 +49,11 @@ async function loadPacientes(medicoId) {
 
     } catch (error) {
         console.error("Error al obtener citas:", error);
-        tableBody.innerHTML = `<tr><td colspan="4" class="form-error">Error al cargar las citas: ${error.message}.</td></tr>`;
+        tableBody.innerHTML = `<tr><td colspan="6" class="form-error">Error al cargar las citas: ${error.message}.</td></tr>`;
     }
 }
 
+// Crear fila en la tabla
 function crearFilaTabla(tableBody, cita, paciente) {
     const row = tableBody.insertRow();
     
@@ -78,6 +80,63 @@ function crearFilaTabla(tableBody, cita, paciente) {
         day: '2-digit', month: '2-digit', year: 'numeric',
         hour: '2-digit', minute: '2-digit'
     });
+
+    // Estado actual de la cita
+    row.insertCell().textContent = cita.estado || "N/A";
+
+    // Botón para completar cita
+    const accionCell = row.insertCell();
+    const btn = document.createElement("button");
+    btn.textContent = "🗒️ Completar";
+    btn.classList.add("btn-completar");
+
+    // Si ya está completa, desactivar el botón
+    if (cita.estado?.toLowerCase() === "completa") {
+        btn.disabled = true;
+        btn.textContent = "✅ Completada";
+    }
+
+    btn.onclick = () => completarCita(cita, row);
+    accionCell.appendChild(btn);
 }
 
+// Cambiar estado a "completa"
+async function completarCita(cita, fila) {
+    const confirmar = confirm("¿Marcar esta cita como COMPLETA?");
+    if (!confirmar) return;
 
+    try {
+        const citaCompleta = {
+            id: cita.id,
+            pacienteId: cita.pacienteId,
+            medicoId: cita.medicoId,
+            clinicaId: cita.clinicaId,
+            fechaCita: cita.fechaCita,
+            motivo: cita.motivo,
+            estado: "completa"
+        };
+
+        const response = await fetch(`${API_BASE_URL}Citas/${cita.id}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(citaCompleta)
+        });
+
+        if (!response.ok) {
+            const txt = await response.text();
+            throw new Error(txt);
+        }
+
+        // Actualizar visualmente la fila sin recargar
+        fila.cells[4].textContent = "completa";
+        const btn = fila.cells[5].querySelector("button");
+        btn.textContent = "✅ Completada";
+        btn.disabled = true;
+
+        alert("La cita fue marcada como COMPLETA.");
+
+    } catch (error) {
+        console.error("Error actualizando cita:", error);
+        alert("Error al completar la cita.");
+    }
+}

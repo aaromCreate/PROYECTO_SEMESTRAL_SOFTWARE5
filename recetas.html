@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Receta Médica</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand">
+      <span class="brand-logo">⚕️</span>
+      <div class="brand-text">
+        <strong>CSS Panamá</strong>
+        <small>Receta Médica</small>
+      </div>
+    </div>
+    <nav class="nav">
+      <a class="nav-link" href="credencialesM.html">Credenciales</a>
+      <a class="nav-link active" href="pacientes.html">Pacientes</a>
+      <a class="nav-link" href="medicamentos.html">Medicamentos</a>
+      <a class="nav-link" href="recetas.html">Recetas</a>
+      <a class="nav-link" href="hospitales.html">Hospitales</a>
+      <a class="nav-link " href="Registrar.html">Registrar Paciente</a>
+  <button class="nav-link danger" id="logoutBtn">Salir</button>
+</nav>
+  </header>
+  
+  <main class="app-main">
+  <section class="panel active">
+
+    <h2>Nueva Receta</h2>
+
+    <!-- FORMULARIO ESTILIZADO -->
+    <div id="formReceta">
+
+      <div class="form-group">
+        <label>Medicamento:</label>
+        <input type="text" id="medNombre" readonly />
+      </div>
+
+      <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+        <div class="form-group">
+          <label>Paciente:</label>
+          <select id="pacienteId" required>
+            <option value="">Cargando pacientes...</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Clínica:</label>
+          <select id="clinicaId" required>
+            <option value="">Cargando clínicas...</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="stockInfo" class="stock-box"></div>
+
+      <div class="form-group">
+        <label>Cantidad:</label>
+        <input type="number" id="cantidad" min="1" max="100" value="1" required />
+      </div>
+
+      <button class="btn primary" id="generarReceta">🩺 Generar Receta</button>
+      <button class="btn secondary" id="imprimirBtn" style="display:none;">🖨️ Imprimir</button>
+
+    </div>
+
+    <!-- Comprobante -->
+    <div id="comprobante" class="card" style="display:none; margin-top: 2rem;">
+      <h3> Receta Generada</h3>
+      <div id="comprobanteContent"></div>
+    </div>
+  
+     <footer class="app-footer">
+    <p>© <span id="year"></span> Caja de Seguro Social de Panamá — Portal Médico</p>
+  </footer>
+  </section>
+</main>
+  
+  <script type="module" src="js/api.js"></script>
+  <script type="module" src="js/recetas.js"></script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Registrar Paciente</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand">
+      <span class="brand-logo">⚕️</span>
+      <div class="brand-text">
+        <strong>CSS Panamá</strong>
+        <small>Portal Médico</small>
+      </div>
+    </div>
+    <nav class="nav">
+      <a class="nav-link" href="credencialesM.html">Credenciales</a>
+      <a class="nav-link active" href="pacientes.html">Pacientes</a>
+      <a class="nav-link" href="medicamentos.html">Medicamentos</a>
+      <a class="nav-link" href="recetas.html">Recetas</a>
+      <a class="nav-link" href="hospitales.html">Hospitales</a>
+      <a class="nav-link " href="Registrar.html">Registrar Paciente</a>
+      <button class="nav-link danger" id="logoutBtn">Salir</button>
+    </nav>
+  </header>
+
+  <main class="app-main">
+    <section class="panel active">
+      <h2>Registrar nuevo paciente</h2>
+      <form id="pacienteForm" class="form">
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input type="text" id="nombre" required />
+        </div>
+        <div class="form-group">
+          <label for="apellido">Apellido</label>
+          <input type="text" id="apellido" required />
+        </div>
+        <div class="form-group">
+          <label for="correo">Correo</label>
+          <input type="email" id="correo" required />
+        </div>
+        <div class="form-group">
+          <label for="contrasena">Contraseña</label>
+          <input type="password" id="contrasena" required />
+        </div>
+        <div class="form-group">
+          <label for="telefono">Teléfono</label>
+          <input type="text" id="telefono" required />
+        </div>
+        <div class="form-group">
+          <label for="fechaNacimiento">Fecha de Nacimiento</label>
+          <input type="date" id="fechaNacimiento" required />
+        </div>
+        <button type="submit" class="btn primary">Registrar</button>
+        <p id="formMessage" class="form-message"></p>
+      </form>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <p>© <span id="year"></span> Caja de Seguro Social de Panamá — Portal Médico</p>
+  </footer>
+
+  <script type="module" src="js/registrarPaciente.js"></script>
+  <script type="module" src="js/api.js"></script>
+</body>
+</html>

@@ -16,16 +16,18 @@
       </div>
     </div>
     <nav class="nav">
-      <a class="nav-link" href="credenciales.html">Credenciales</a>
+      <a class="nav-link" href="credencialesM.html">Credenciales</a>
       <a class="nav-link active" href="pacientes.html">Pacientes</a>
       <a class="nav-link" href="medicamentos.html">Medicamentos</a>
+      <a class="nav-link" href="recetas.html">Recetas</a>
       <a class="nav-link" href="hospitales.html">Hospitales</a>
+      <a class="nav-link " href="Registrar.html">Registrar Paciente</a>
       <button class="nav-link danger" id="logoutBtn">Salir</button>
     </nav>
   </header>
   <main class="app-main">
     <section class="panel active">
-      <h2>Pacientes asignados</h2>
+      <h2>Pacientes Asignados</h2>
       <div class="table-wrap">
         <table class="table">
           <thead>
@@ -33,10 +35,12 @@
               <th>Nombre</th>
               <th>Fecha Nacimiento</th> <th>Motivo</th>
               <th>Fecha cita</th>
+              <th>Estado</th>
+              <th>Completar</th>
             </tr>
           </thead>
           <tbody id="pacientesBody">
-            <tr><td colspan="4">Cargando pacientes...</td></tr>
+            <tr><td colspan="6">Cargando pacientes...</td></tr>
           </tbody>
         </table>
       </div>

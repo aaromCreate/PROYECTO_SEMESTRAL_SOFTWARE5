@@ -1,8 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const API_MEDICO = "http://localhost:5000/api/Medicos";
-    const API_PACIENTE = "http://localhost:5000/api/Pacientes";
+    const API_MEDICO = "https://localhost:7137/api/Medicos";
+    const API_PACIENTE = "https://localhost:7137/api/Pacientes";
 
-    // Obtener elementos del DOM
     const year = document.querySelector("#year");
     const form = document.querySelector("#loginForm");
     const idInput = document.querySelector("#idMedico");
@@ -50,11 +49,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 throw new Error(`Error HTTP: ${resMedico.status}/${resPaciente.status}`);
             }
 
-            // Convertir respuesta a JSON
             const medicosJSON = await resMedico.json();
             const pacientesJSON = await resPaciente.json();
 
-            // Asegurarnos que sean arrays
             const medicos = Array.isArray(medicosJSON) ? medicosJSON : medicosJSON.data || [];
             const pacientes = Array.isArray(pacientesJSON) ? pacientesJSON : pacientesJSON.data || [];
 
@@ -80,7 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     `Bienvenido, ${pacienteLogueado.nombre} ${pacienteLogueado.apellido}. Redirigiendo...`,
                     "#86efac"
                 );
-                localStorage.setItem("medicoId", pacienteLogueado.id || pacienteLogueado.Id);
+                localStorage.setItem("pacienteId", pacienteLogueado.id || pacienteLogueado.Id);
 
                 setTimeout(() => {
                     window.location.href = "credencialesP.html";
