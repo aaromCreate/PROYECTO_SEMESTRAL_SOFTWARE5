@@ -156,3 +156,5 @@ async function completarCita(cita, fila) {
         alert("Error al completar la cita.");
     }
 }
+
+
