@@ -86,7 +86,7 @@ async function loadMedicamentosPorClinica(clinicaId) {
             }
         }
 
-        // 3. (Opcional pero recomendado) agrupar por medicamentoId para no repetir filas
+        // 3. agrupar por medicamentoId para no repetir filas
         const stockPorMed = {};
         for (const stock of stocks) {
             const medId = stock.medicamentoId;

@@ -50,7 +50,6 @@ body {
   justify-content: space-between;
   gap: var(--gap);
   padding: 14px 20px;
-  /* Opacidad ajustada a 0.9 para mejor contraste */
   background: rgba(139, 128, 255, 0.9); 
   backdrop-filter: saturate(140%) blur(10px);
   border-bottom: 1px solid var(--border);
@@ -79,7 +78,6 @@ body {
   letter-spacing: 0.2px;
 }
 .brand-text small {
-  /* MEJORA DE CONTRASTE: Usar blanco puro o muy claro */
   color: #ffffff; 
   opacity: 0.85; 
 }
@@ -472,7 +470,7 @@ body {
 body, .app-main {
     background: #0c1326 !important;
 }
-/* ======== FORMULARIO DE AGENDAR CITA (ESTILO PREMIUM) ======== */
+/* ========  ESTILOS PARA FORMULARIO DE AGENDAR CITA ======== */
 
 #formCita {
   background: radial-gradient(800px 500px at 100% 0%, #0f1a35 0%, var(--surface) 60%);
@@ -800,22 +798,19 @@ body, .app-main {
 /* ======== MEJORAS GENERALES RESPONSIVAS ======== */
 
 /* Header mejorado para móviles */
-/* Header mejorado para móviles */
 @media (max-width: 768px) {
 .brand {
-order: 1; /* CAMBIO: Ahora el logo es el primero (arriba) */
-/* Asegúrate de centrar la marca si estás en modo columna */
+order: 1; 
  justify-content: center;
 width: 100%;
 }
  
 .nav {
- order: 2; /* CAMBIO: Ahora los botones de navegación son los segundos (abajo) */
+ order: 2; 
 width: 100%;
 }
 
 .app-header {
-/* Añadir un poco más de separación entre el logo y los botones */
 gap: 16px; 
 }
  
@@ -852,7 +847,7 @@ font-size: 18px;
 @media (max-width: 480px) {
   .btn, .nav-link, #btnAgendar, #generarReceta {
     padding: 12px 16px;
-    font-size: 16px; /* Previene zoom en iOS */
+    font-size: 16px; 
   }
 }
 
@@ -866,7 +861,7 @@ font-size: 18px;
   #formCita select,
   #formReceta input,
   #formReceta select {
-    font-size: 16px; /* Previene zoom iOS */
+    font-size: 16px; 
   }
 }
 
@@ -916,4 +911,3 @@ input, select, textarea {
     scroll-behavior: smooth;
   }
 }
-

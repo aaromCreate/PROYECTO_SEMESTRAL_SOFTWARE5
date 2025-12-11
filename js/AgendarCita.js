@@ -168,7 +168,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ==========================================================
-    // NUEVO: FUNCION ANTISPAM — EVITAR CITAS DUPLICADAS
+    // FUNCION ANTISPAM — EVITAR CITAS DUPLICADAS
     // ==========================================================
     async function verificarConflictoCita(pacienteId, fechaCita) {
         try {
@@ -226,14 +226,13 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             // ==========================================================
-            // NUEVO: Validación antibasura — evitar citas duplicadas
+            // Validación antibasura — evitar citas duplicadas
             // ==========================================================
             const hayConflicto = await verificarConflictoCita(pacienteSeleccionado, fechaCita);
             if (hayConflicto) {
                 if (resultado) resultado.textContent = "❌ Ya existe una cita programada en esa fecha y hora.";
                 return;
             }
-            // ==========================================================
 
             const cita = {
                 pacienteId: pacienteSeleccionado,

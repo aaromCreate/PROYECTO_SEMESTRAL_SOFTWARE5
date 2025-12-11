@@ -28,9 +28,7 @@ async function loadMedicoData(id) {
         
         const medico = await response.json();
         
-        // 3. Renderizar los datos en el HTML
-        
-        // Asume que la API devuelve los campos: nombre, apellido, id, especialidad, correo, telefono
+        // 3. Renderizar los datos del médico en el HTML
         
         document.getElementById('medico-nombre').textContent = `Dr(a). ${medico.nombre} ${medico.apellido || ''}`;
         document.getElementById('medico-id').textContent = medico.id || 'N/A';
@@ -53,7 +51,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const year = document.querySelector("#year");
     if (year) year.textContent = new Date().getFullYear();
 
-    const pacienteId = localStorage.getItem("pacienteId"); // si guardaste pacienteId, usa ese
+    const pacienteId = localStorage.getItem("pacienteId"); 
     if (!pacienteId) return console.error("No se encontró el ID del paciente en localStorage");
 
     const nombreEl = document.getElementById("paciente-nombre");

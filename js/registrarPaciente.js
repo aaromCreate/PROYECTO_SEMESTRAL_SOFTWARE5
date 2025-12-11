@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
         message.textContent = "⏳ Registrando paciente...";
-        message.style.color = "#facc15"; // amarillo
+        message.style.color = "#facc15"; 
 
         const paciente = {
             id: 0,
@@ -32,11 +32,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (response.ok) {
                 message.textContent = "✅ Paciente registrado correctamente";
-                message.style.color = "#22c55e"; // verde
+                message.style.color = "#22c55e"; 
                 form.reset();
             } else {
                 message.textContent = `❌ Error: ${result.mensaje || "No se pudo registrar"}`;
-                message.style.color = "#ef4444"; // rojo
+                message.style.color = "#ef4444"; 
             }
         } catch (error) {
             console.error("Error de conexión:", error);

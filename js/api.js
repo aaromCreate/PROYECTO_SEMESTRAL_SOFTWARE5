@@ -1,11 +1,11 @@
-// js/api.js - VERSIÓN CORREGIDA
+//api.js 
 export const API_BASE_URL = "https://localhost:7137/api/";
 
 export const getMedicoId = () => localStorage.getItem('medicoId');
-export const getPacienteId = () => localStorage.getItem('pacienteId'); // ← minúscula 'p'
+export const getPacienteId = () => localStorage.getItem('pacienteId'); 
 
 /**
- * checkLogin MEJORADO: soporta médicos Y pacientes
+ * checkLogin 
  */
 export const checkLogin = () => {
     const medicoId = getMedicoId();
@@ -21,7 +21,7 @@ export const checkLogin = () => {
 
 export const logout = () => {
     localStorage.removeItem('medicoId');
-    localStorage.removeItem('pacienteId'); // ← Limpia AMBOS
+    localStorage.removeItem('pacienteId'); 
     window.location.href = "index.html";
 };
 

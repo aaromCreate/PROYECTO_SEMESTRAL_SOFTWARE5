@@ -23,7 +23,7 @@ async function loadPacientes(medicoId) {
     const urlCitas = `${API_BASE_URL}Citas?medicoId=${medicoId}`;
     
     try {
-        // 1. Obtener citas (igual que antes)
+        // 1. Obtener citas 
         const responseCitas = await fetch(urlCitas);
         if (!responseCitas.ok) throw new Error(`Error HTTP: ${responseCitas.status}`);
         
@@ -38,7 +38,7 @@ async function loadPacientes(medicoId) {
             return;
         }
 
-        // 2. Para cada cita, obtener paciente por ID (igual que antes)
+        // 2. Para cada cita, obtener paciente por ID 
         for (const cita of citas) {
             try {
                 const pacienteData = await fetch(`${API_BASE_URL}Pacientes/${cita.pacienteId}`);
@@ -84,7 +84,7 @@ function crearFilaTabla(tableBody, cita, paciente) {
     // Motivo
     row.insertCell().textContent = cita.motivo || 'N/A';
     
-    // Fecha cita (incluye hora)
+    // Fecha cita 
     const appointmentDate = new Date(cita.fechaCita);
     row.insertCell().textContent = appointmentDate.toLocaleString('es-PA', {
         day: '2-digit', month: '2-digit', year: 'numeric',
@@ -121,7 +121,6 @@ async function completarCita(cita, fila) {
     if (!confirmar) return;
 
     try {
-        // IMPORTANTE → La API exige TODOS los campos del modelo
         const citaCompleta = {
             id: cita.id,
             pacienteId: cita.pacienteId,

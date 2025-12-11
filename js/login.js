@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
-        setFormState(false, "Iniciando sesión...", "#facc15"); // amarillo claro
+        setFormState(false, "Iniciando sesión...", "#facc15"); 
 
         const correo = idInput.value.trim();
         const contrasena = pwdInput.value.trim();

@@ -1,7 +1,7 @@
-// MisCitas.js - CON PACIENTE ID DINÁMICO IMPLEMENTADO
+// MisCitas.js 
 document.addEventListener('DOMContentLoaded', function() {
     
-    console.log('🎯 MisCitas.js cargado correctamente');
+    console.log('MisCitas.js cargado correctamente');
     
     // Elementos del DOM
     const nombrePacienteSpan = document.getElementById('nombrePaciente');
@@ -13,23 +13,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
     yearSpan.textContent = new Date().getFullYear();
 
-    // ⭐ CAMBIADO: pacienteId dinámico desde storage
+    // pacienteId dinámico desde storage
     let pacienteId = parseInt(localStorage.getItem('pacienteId') || sessionStorage.getItem('pacienteId'));
     
     // Fallback si no hay ID válido
     if (!pacienteId || isNaN(pacienteId)) {
         pacienteId = 1;
-        console.log('⚠️ No se encontró pacienteId válido, usando ID 1');
+        console.log('No se encontró pacienteId válido, usando ID 1');
     }
     
-    console.log('👤 Paciente ID cargado:', pacienteId);
+    console.log('Paciente ID cargado:', pacienteId);
     
     let todasLasCitas = [];
     let nombrePaciente = 'Cargando...';
     let medicos = {};
     let clinicas = {};
 
-    // ⭐ CARGAR MÉDICOS
+    //CARGAR MÉDICOS
     async function cargarMedicos() {
         try {
             const response = await fetch(`https://localhost:7137/api/Medicos`);
@@ -41,13 +41,13 @@ document.addEventListener('DOMContentLoaded', function() {
             listaMedicos.forEach(medico => {
                 medicos[medico.id] = `${medico.nombre} ${medico.apellido || ''}`.trim();
             });
-            console.log('✅ Médicos cargados:', medicos);
+            console.log('Médicos cargados:', medicos);
         } catch (error) {
             console.error('Error médicos:', error);
         }
     }
 
-    // ⭐ CARGAR CLÍNICAS
+    //CARGAR CLÍNICAS
     async function cargarClinicas() {
         try {
             const response = await fetch(`https://localhost:7137/api/Clinicas`);
@@ -59,13 +59,13 @@ document.addEventListener('DOMContentLoaded', function() {
             listaClinicas.forEach(clinica => {
                 clinicas[clinica.id] = clinica.nombre || `Clínica ${clinica.id}`;
             });
-            console.log('✅ Clínicas cargadas:', clinicas);
+            console.log('Clínicas cargadas:', clinicas);
         } catch (error) {
             console.error('Error clínicas:', error);
         }
     }
 
-    // ⭐ CORREGIDO: Usa pacienteId dinámico
+    //Carga nombre del paciente usando ID
     async function cargarNombrePaciente() {
         try {
             const response = await fetch(`https://localhost:7137/api/Pacientes`);
@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (paciente) {
                     nombrePaciente = `${paciente.nombre} ${paciente.apellido}`.trim();
                     nombrePacienteSpan.textContent = nombrePaciente;
-                    console.log('✅ Paciente encontrado:', nombrePaciente, '(ID:', pacienteId, ')');
+                    console.log('Paciente encontrado:', nombrePaciente, '(ID:', pacienteId, ')');
                 } else {
                     nombrePacienteSpan.textContent = `Paciente ID: ${pacienteId}`;
                 }
@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // ⭐ CORREGIDO: Usa pacienteId dinámico
+    //Carga citas del Paciente con el mismo ID
     async function cargarCitasPaciente() {
         try {
             const response = await fetch(`https://localhost:7137/api/Citas?pacienteId=${pacienteId}`);
@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function() {
             todasLasCitas = apiResponse.data || [];
             todasLasCitas = todasLasCitas.filter(cita => Number(cita.pacienteId) === pacienteId);
             
-            console.log('📋 Citas del paciente ID', pacienteId, ':', todasLasCitas.length, 'citas');
+            console.log('Citas del paciente ID', pacienteId, ':', todasLasCitas.length, 'citas');
             renderizarCitas(todasLasCitas);
             
         } catch (error) {
@@ -109,9 +109,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // ⭐ SUPERCARGAR TODO CON Promise.all
+    //SUPERCARGAR TODO CON Promise.all
     async function inicializar() {
-        console.log('🚀 Cargando datos para paciente ID:', pacienteId);
+        console.log('Cargando datos para paciente ID:', pacienteId);
         
         await Promise.all([
             cargarNombrePaciente(),
@@ -120,12 +120,12 @@ document.addEventListener('DOMContentLoaded', function() {
         ]);
         
         await cargarCitasPaciente();
-        console.log('✅ Todo cargado para paciente ID:', pacienteId);
+        console.log('Todo cargado para paciente ID:', pacienteId);
     }
 
-    // ⭐ CORREGIDO: Error de variable en renderizarCitas
+    //renderizarCitas y darle estilos
     function renderizarCitas(citas) {
-        console.log('🎨 Renderizando:', citas.length, 'citas');
+        console.log('Renderizando:', citas.length, 'citas');
         
         if (citas.length === 0) {
             listaCitas.innerHTML = `
@@ -201,6 +201,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // 🚀 INICIAR TODO
+    //INICIAR TODO
     inicializar();
 });
