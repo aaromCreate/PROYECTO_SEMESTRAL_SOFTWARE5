@@ -1,57 +1,29 @@
-// js/api.js
-
-/**
- * URL Base de la API de .NET Core.
- * IMPORTANTE: Asegúrate de que el puerto (ej: 7137) sea el mismo que usa tu API.
- */
+// js/api.js - VERSIÓN CORREGIDA
 export const API_BASE_URL = "https://localhost:7137/api/";
 
-// ----------------------------------------------------------------------
-// FUNCIONES DE AUTENTICACIÓN Y SESIÓN
-// ----------------------------------------------------------------------
+export const getMedicoId = () => localStorage.getItem('medicoId');
+export const getPacienteId = () => localStorage.getItem('pacienteId'); // ← minúscula 'p'
 
 /**
- * Obtiene el ID del médico guardado en el almacenamiento local.
- * @returns {string | null} El ID del médico o null.
- */
-export const getMedicoId = () => {
-    return localStorage.getItem('medicoId');
-};
-
-export const getPacienteId = () => {
-    return localStorage.getItem('PacienteId');
-};
-
-/**
- * Verifica si el usuario está logueado. Si no, redirige a la página de login.
- * @returns {string | null} El ID del médico si está logueado, o inicia la redirección.
+ * checkLogin MEJORADO: soporta médicos Y pacientes
  */
 export const checkLogin = () => {
     const medicoId = getMedicoId();
-    if (!medicoId) {
-        // Redirige al login si no hay ID guardado
-        window.location.href = "index.html"; 
-        return null; 
+    const pacienteId = getPacienteId();
+    
+    if (!medicoId && !pacienteId) {
+        window.location.href = "index.html";
+        return null;
     }
-    return medicoId;
+    
+    return medicoId || pacienteId; // Devuelve el que exista
 };
 
-/**
- * Cierra la sesión del usuario, elimina el ID del almacenamiento local 
- * y redirige a la página de login.
- */
 export const logout = () => {
     localStorage.removeItem('medicoId');
-    // Puedes limpiar otros datos si los tienes, como un token JWT:
-    // localStorage.removeItem('authToken'); 
-    
-    // Redirige a la página de login
-    window.location.href = "index.html"; 
+    localStorage.removeItem('pacienteId'); // ← Limpia AMBOS
+    window.location.href = "index.html";
 };
-
-// ----------------------------------------------------------------------
-// INICIALIZACIÓN COMÚN (Se ejecuta al cargar cualquier página)
-// ----------------------------------------------------------------------
 
 document.addEventListener("DOMContentLoaded", () => {
     // 1. Asigna el año actual al footer

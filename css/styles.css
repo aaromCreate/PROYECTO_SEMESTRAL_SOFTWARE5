@@ -66,10 +66,12 @@ body {
   place-content: center;
   width: 40px; height: 40px;
   border-radius: 12px;
-  background: linear-gradient(135deg, var(--primary), var(--accent));
   color: white;
   font-size: 20px;
   box-shadow: var(--shadow);
+}
+.brand-text{
+  margin-left: 5px;
 }
 .brand-text strong {
   display: block;
@@ -84,10 +86,12 @@ body {
 
 .nav {
   display: flex;
-  gap: 8px;
+  gap: 15px;
   flex-wrap: wrap;
 }
 .nav-link {
+  text-decoration: none;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   appearance: none;
   border: 1px solid var(--border);
   color: var(--on-surface);
@@ -97,8 +101,16 @@ body {
   cursor: pointer;
   transition: border-color .2s, transform .05s, box-shadow .2s;
 }
-.nav-link:hover { border-color: #38507e }
-.nav-link:active { transform: translateY(1px) }
+.nav-link a{
+  text-decoration: none;
+}
+.nav-link:hover { 
+  border-color: #38507e; 
+  color:#70a2fd;
+}
+.nav-link:active { 
+  transform: translateY(1px) 
+}
 .nav-link.active {
   border-color: var(--primary);
   box-shadow: 0 0 0 2px rgba(45,127,249,.25);
@@ -355,6 +367,7 @@ body {
   max-width: var(--maxw);
   padding: 0 20px;
   color: var(--muted);
+  text-align: center;
 }
 .foot-note { font-size: .9rem }
 
@@ -551,6 +564,15 @@ body, .app-main {
 
 .autocomplete-item:hover {
   background: rgba(255,255,255,0.07);
+}
+
+#btnAgendar{
+  margin-top: 10px;
+}
+
+#resultado{
+  margin-top: 30px;
+  font-size: x-large;
 }
 
 /* Suavidad */

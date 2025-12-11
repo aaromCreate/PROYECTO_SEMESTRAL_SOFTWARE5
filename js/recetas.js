@@ -252,12 +252,20 @@ async function cargarClinicas() {
 ===================================================== */
 function mostrarComprobante(pedido) {
     const nombreMed = document.getElementById('medNombre').value;
+
+    // Obtener nombre del paciente y de la clínica desde los select
+    const pacienteSelect = document.getElementById('pacienteId');
+    const pacienteNombre = pacienteSelect.options[pacienteSelect.selectedIndex].text;
+
+    const clinicaSelect = document.getElementById('clinicaId');
+    const clinicaNombre = clinicaSelect.options[clinicaSelect.selectedIndex].text;
+
     document.getElementById('comprobanteContent').innerHTML = `
         <div class="comprobante">
             <h4>Receta Médica #${pedido.id}</h4>
             <p><strong>Medicamento:</strong> ${nombreMed}</p>
-            <p><strong>Paciente ID:</strong> ${pedido.pacienteId}</p>
-            <p><strong>Clínica:</strong> ${pedido.clinicaId}</p>
+            <p><strong>Paciente:</strong> ${pacienteNombre}</p>
+            <p><strong>Clínica:</strong> ${clinicaNombre}</p>
             <p><strong>Cantidad:</strong> ${pedido.cantidad}</p>
             <p><strong>Fecha:</strong> ${new Date(pedido.fecha).toLocaleString('es-PA')}</p>
         </div>
